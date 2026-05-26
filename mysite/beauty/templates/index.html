@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aura e.Commerce beauty brand store</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <section id="top">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="{% static 'images/logo.png' %}">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-3 mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'index' %}" style="color: white;">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'about' %}" style="color: white;">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'product' %}"
+                style="color: white;">Product</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Single Product
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="{% url 'category' 'Fragrance' %}">Fragrance</a></li>
+                <li><a class="dropdown-item" href="{% url 'category' 'Lipsticks' %}">Lipstick</a></li>
+                <li><a class="dropdown-item" href="{% url 'category' 'Serum' %}">Serum</a></li>
+                <li><a class="dropdown-item" href="{% url 'category' 'Nail color' %}">Nail Colour</a></li>
+                <li><a class="dropdown-item" href="{% url 'category' 'Makeup' %}">Makeup</a></li>
+
+              </ul>
+            </li>
+            <div class="icon">
+              <a href="{% url 'login' %}">
+                <i class="fa-solid fa-user" style="color: white;"></i></a>
+              <a href="#"><i class="fa-solid fa-heart" style="color: white;"></i></a>
+               <a href="{% url 'cart_summary' %}"><i class="fa-solid fa-cart-shopping" style="color: white;"><span class="badge bg-dark text-white ms-1 rounded-pill" id="cart_quantity"></span></i></a>
+              <a href="{% url 'search' %}"><i class="fa-solid fa-magnifying-glass" style="color: white;"></i></a>
+            </div>
+        </div>
+      </div>
+
+    </nav>
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+          aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+          aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+          aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="{% static 'images/banner2.jpg' %}" width="100%">
+          <div class="carousel-caption d-none d-md-block">
+            <h1>REVEAL YOUR<br>BEAUTY</h1>
+            <p>Define Your Perfect Look with Premium Product</p>
+            <a href="{% url 'product' %}"><button class="topbutton1">SHOP COLLECTION</button></a>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="{% static 'images/banner1.jpg' %}" width="100%">
+          <div class="carousel-caption d-none d-md-block">
+            <h1>ENHANCE YOUR<br>GLOW</h1>
+            <p>Illuminate Your Beauty with Premium Products</p>
+            <a href="{% url 'product' %}"><button class="topbutton2">SHOP COLLECTION</button></a>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="{% static 'images/banner3.jpg' %}" width="100%">
+          <div class="carousel-caption d-none d-md-block d-xl-block">
+            <h1>DEFINE YOUR<br>BEAUTY</h1>
+            <p>Transform Your look with Luxury Cosmetics</p>
+            <a href="{% url 'product' %}"><button class="topbutton3">EXPLORE COLLECTION</button></a>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </section>
+  <!--Section 2-->
+  <section class="section2">
+    <div class="images">
+      <img src="{% static 'images/logo1.png'%}">
+      <img src="{% static 'images/logo2.png' %}">
+      <img src="{% static 'images/logo3.png' %}">
+      <img src="{% static 'images/logo4.png' %}">
+      <img src="{% static 'images/logo5.png' %}">
+    </div>
+  </section>
+  <!--section3-->
+  <section class="section3">
+    <div class="sec3images">
+      <div class="sec31">
+        <img src="{% static 'images/category1.jpg' %}">
+        <div class="sec31text">
+          <p>SKINCARE ESSENTIALS</p>
+        </div>
+      </div>
+      <div class="sec32">
+        <img src="{% static 'images/category3.jpg' %}">
+        <div class="sec32text">
+          <p>MAKEUP COLLECTION</p>
+        </div>
+      </div>
+      <div class="sec33">
+        <img src="{% static 'images/category2.jpg' %}">
+        <div class="sec33text">
+          <p>FRAGRANCE&SCENTS</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--section 4-->
+  <section class="section4">
+    <div class="sec4top">
+      <h1 class="sec4h1">NEW ARRIVALS</h1>
+      <p class="sec4p">Browse our brand new collections</p>
+    </div>
+    <div class="sample1">
+      <div class="card">
+        <img src="{% static 'images/product-item15.jpg' %}" class="card-img" alt="...">
+        <div class="card-img-overlay">
+          <button class="demo">
+            Add to Cart
+            <i class="fa-solid fa-arrow-right"></i>
+            <i class="fa-solid fa-maximize"></i>
+            <i class="fa-regular fa-heart"></i>
+          </button>
+
+        </div>
+        <div>
+          <p class="sec4t1">Body Lotion</p>
+          <p class="rupee1">&#36;23.00</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="{% static 'images/product-item14.jpg' %}" class="card-img" alt="...">
+        <div class="card-img-overlay">
+          <button class="demo">
+            Add to Cart
+            <i class="fa-solid fa-arrow-right"></i>
+            <i class="fa-solid fa-maximize"></i>
+            <i class="fa-regular fa-heart"></i>
+          </button>
+        </div>
+        <div>
+          <p class="sec4t1">Lipstick</p>
+          <p class="rupee1">&#36;12.00</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="{% static 'images/product-item6.jpg' %}" class="card-img" alt="...">
+        <div class="card-img-overlay">
+          <button class="demo">
+            Add to Cart
+            <i class="fa-solid fa-arrow-right"></i>
+            <i class="fa-solid fa-maximize"></i>
+            <i class="fa-regular fa-heart"></i>
+          </button>
+        </div>
+        <div>
+          <p class="sec4t1">Nail color</p>
+          <p class="rupee1">&#36;2.00</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="{% static 'images/product-item13.jpg' %}" class="card-img" alt="...">
+        <div class="card-img-overlay">
+          <button class="demo">
+            Add to Cart
+            <i class="fa-solid fa-arrow-right"></i>
+            <i class="fa-solid fa-maximize"></i>
+            <i class="fa-regular fa-heart"></i>
+          </button>
+        </div>
+        <div>
+          <p class="sec4t1">Body Bar</p>
+          <p class="rupee1">&#36;5.00</p>
+        </div>
+      </div>
+    </div>
+
+    </div>
+    <div class="sample2">
+      <div class="card">
+        <img src="{% static 'images/product-item1.jpg' %}" class="card-img" alt="...">
+        <div class="card-img-overlay">
+          <button class="demo">
+            Add to Cart
+            <i class="fa-solid fa-arrow-right"></i>
+            <i class="fa-solid fa-maximize"></i>
+            <i class="fa-regular fa-heart"></i>
+          </button>
+
+        </div>
+        <div>
+          <p class="sec4t1">Lip Tint</p>
+          <p class="rupee1">&#36;10.00</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="{% static 'images/product-item5.jpg' %}" class="card-img" alt="...">
+        <div class="card-img-overlay">
+          <button class="demo">
+            Add to Cart
+            <i class="fa-solid fa-arrow-right"></i>
+            <i class="fa-solid fa-maximize"></i>
+            <i class="fa-regular fa-heart"></i>
+          </button>
+        </div>
+        <div>
+          <p class="sec4t1">Makeup Fixer</p>
+          <p class="rupee1">&#36;20.00</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="{% static 'images/product-item12.jpg' %}" class="card-img" alt="...">
+        <div class="card-img-overlay">
+          <button class="demo">
+            Add to Cart
+            <i class="fa-solid fa-arrow-right"></i>
+            <i class="fa-solid fa-maximize"></i>
+            <i class="fa-regular fa-heart"></i>
+          </button>
+        </div>
+        <div>
+          <p class="sec4t1">Eye Cream</p>
+          <p class="rupee1">&#36;13.00</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="{% static 'images/product-item16.jpg' %}" class="card-img" alt="...">
+        <div class="card-img-overlay">
+          <button class="demo">
+            Add to Cart
+            <i class="fa-solid fa-arrow-right"></i>
+            <i class="fa-solid fa-maximize"></i>
+            <i class="fa-regular fa-heart"></i>
+          </button>
+        </div>
+        <div>
+          <p class="sec4t1">Lipbalm</p>
+          <p class="rupee1">&#36;10.00</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--section5-->
+  <div class="offer">
+    <div class="offerdiv1">
+      <p class="offerp">
+        Get <i>20%</i> OFF on Your First Purchase
+      </p>
+      <p class="offerp2">
+        Sign Up for our newsletter and never miss any offers
+      </p>
+    </div>
+    <div class="offerdiv2">
+      <label>
+        <input type="email" placeholder="Enter Your Email Address">
+      </label><br>
+      <a href="{% url 'login' %}"><button class="registerb">Register Now</button></a>
+    </div>
+  </div>
+  <!--section6-->
+  <section class="section4">
+    <div class="sec4top">
+      <h1 class="sec4h1">BEST SELLERS</h1>
+      <p class="sec4p">Elevate your daily looks with our best sellers</p>
+    </div>
+    <div class="sample1">
+      <div class="card">
+        <img src="{% static 'images/product-item2.jpg' %}" class="card-img" alt="...">
+        <div class="card-img-overlay">
+          <button class="demo">
+            Add to Cart
+            <i class="fa-solid fa-arrow-right"></i>
+            <i class="fa-solid fa-maximize"></i>
+            <i class="fa-regular fa-heart"></i>
+          </button>
+
+        </div>
+        <div>
+          <p class="sec4t1">Herbal soap</p>
+          <p class="rupee1">&#36;10.00</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="{% static 'images/product-item9.jpg' %}" class="card-img" alt="...">
+        <div class="card-img-overlay">
+          <button class="demo">
+            Add to Cart
+            <i class="fa-solid fa-arrow-right"></i>
+            <i class="fa-solid fa-maximize"></i>
+            <i class="fa-regular fa-heart"></i>
+          </button>
+        </div>
+        <div>
+          <p class="sec4t1">Liquid Blush</p>
+          <p class="rupee1">&#36;23.00</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="{% static 'images/product-item10.jpg' %}" class="card-img" alt="...">
+        <div class="card-img-overlay">
+          <button class="demo">
+            Add to Cart
+            <i class="fa-solid fa-arrow-right"></i>
+            <i class="fa-solid fa-maximize"></i>
+            <i class="fa-regular fa-heart"></i>
+          </button>
+        </div>
+        <div>
+          <p class="sec4t1">Foundation</p>
+          <p class="rupee1">&#36;40.00</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="{% static 'images/product-item8.jpg' %}" class="card-img" alt="...">
+        <div class="card-img-overlay">
+          <button class="demo">
+            Add to Cart
+            <i class="fa-solid fa-arrow-right"></i>
+            <i class="fa-solid fa-maximize"></i>
+            <i class="fa-regular fa-heart"></i>
+          </button>
+        </div>
+        <div>
+          <p class="sec4t1">Concelar</p>
+          <p class="rupee1">&#36;30.00</p>
+        </div>
+      </div>
+    </div>
+
+    </div>
+    <div class="sample2">
+      <div class="card">
+        <img src="{% static 'images/product-item7.jpg' %}" class="card-img" alt="...">
+        <div class="card-img-overlay">
+          <button class="demo">
+            Add to Cart
+            <i class="fa-solid fa-arrow-right"></i>
+            <i class="fa-solid fa-maximize"></i>
+            <i class="fa-regular fa-heart"></i>
+          </button>
+
+        </div>
+        <div>
+          <p class="sec4t1">kajal</p>
+          <p class="rupee1">&#36;10.00</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="{% static 'images/product-item4.jpg' %}" class="card-img" alt="...">
+        <div class="card-img-overlay">
+          <button class="demo">
+            Add to Cart
+            <i class="fa-solid fa-arrow-right"></i>
+            <i class="fa-solid fa-maximize"></i>
+            <i class="fa-regular fa-heart"></i>
+          </button>
+        </div>
+        <div>
+          <p class="sec4t1">Shampoo</p>
+          <p class="rupee1">&#36;34.00</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="{% static 'images/product-item11.jpg' %}" class="card-img" alt="...">
+        <div class="card-img-overlay">
+          <button class="demo">
+            Add to Cart
+            <i class="fa-solid fa-arrow-right"></i>
+            <i class="fa-solid fa-maximize"></i>
+            <i class="fa-regular fa-heart"></i>
+          </button>
+        </div>
+        <div>
+          <p class="sec4t1">Face Serum</p>
+          <p class="rupee1">&#36;20.00</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="{% static 'images/product-item3.jpg' %}" class="card-img" alt="...">
+        <div class="card-img-overlay">
+          <button class="demo">
+            Add to Cart
+            <i class="fa-solid fa-arrow-right"></i>
+            <i class="fa-solid fa-maximize"></i>
+            <i class="fa-regular fa-heart"></i>
+          </button>
+        </div>
+        <div>
+          <p class="sec4t1">Body Scrub</p>
+          <p class="rupee1">&#36;36.00</p>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="viewproduct">
+      <a href="{% url 'product' %}"><button class="viewb">VIEW ALL PRODUCT</button></a>
+    </div>
+  </section>
+  <!--section7-->
+  <div class="slogan">
+    <p class="sloganp">"This skincare serum completely transformed my complection.My skincare has never felt more
+      hydrated <br><span style="margin-left: 150px;">and radiant!"</span> </p>
+  </div>
+  <!--section8-->
+  <section class="symbol">
+    <div class="symbol1">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <h3>FREE DELIVERY</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur<br> adipi elit.</p>
+    </div>
+    <div class="symbol1">
+      <i class="fa-solid fa-shield"></i>
+      <h3>100% SECURED PAYMENT</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur<br> adipi elit.</p>
+    </div>
+    <div class="symbol1">
+      <i class="fa-solid fa-award"></i>
+      <h3>QUALITY GUARANTEE</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur<br> adipi elit.</p>
+    </div>
+    <div class="symbol1">
+      <i class="fa-solid fa-circle-dollar-to-slot"></i>
+      <h3>DAILY OFFER</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur<br> adipi elit.</p>
+    </div>
+  </section>
+  <!--section9-->
+  <section class="blog">
+    <div class="blogtop">
+      <h1 class="blogh">RECENT BLOG POST</h1>
+      <a href="{% url 'about' %}"><button class="blogb">Read More</button></a>
+    </div>
+  </section>
+  <!--section10-->
+  <div class="blogcards">
+    <div class="blogcard">
+      <img src="{% static 'images/blog5.jpg' %}">
+      <h2 class="blogtitle">
+        10 Essential Summer Skincare Tips
+      </h2>
+      <p class="blogtext">
+        Protect your skin from sun damage while maintaining that healthy glow. Discover our expert-recommended summer
+        skincare routine that will keep your complexion radiant all season long.
+      </p>
+    </div>
+    <div class="blogcard">
+      <img src="{% static 'images/blog2.jpg' %}">
+      <h2 class="blogtitle">
+        Luxury Beauty Brands On A Budget
+      </h2>
+      <p class="blogtext">
+        You don't need to break the bank for premium beauty results. We've curated the best affordable alternatives to
+        high-end products that deliver exceptional quality without the luxury price tag.
+      </p>
+    </div>
+    <div class="blogcard">
+      <img src="{% static 'images/blog1.jpg' %}">
+      <h2 class="blogtitle">
+        Pro Makeup Artist Secrets Revealed
+      </h2>
+      <p class="blogtext">
+        Learn the techniques that professional makeup artists use to create flawless looks. From foundation application
+        to perfect winged eyeliner, master these skills for everyday glamour.
+      </p>
+    </div>
+  </div>
+  <!--section11-->
+  <footer class="footer">
+    <div class="footercontainer">
+      <div class="footercol">
+        <h1 class="logo">AURA</h1>
+        <p>Find and Define Your Perfect Beauty</p>
+        <div class="socialicons">
+          <i class="fa-brands fa-facebook-f"></i>
+          <i class="fa-brands fa-twitter"></i>
+          <i class="fa-brands fa-pinterest-p"></i>
+          <i class="fa-brands fa-instagram"></i>
+          <i class="fa-brands fa-youtube"></i>
+        </div>
+      </div>
+      <div class="footercol">
+        <h4>QUICK LINKS</h4>
+        <ul>
+          <li>Home</li>
+          <li>About Us</li>
+          <li>Offer</li>
+          <li>Services</li>
+          <li>Contact Us</li>
+        </ul>
+      </div>
+      <div class="footercol">
+        <h4>ABOUT</h4>
+        <ul>
+          <li>How It Work</li>
+          <li>Our Packages</li>
+          <li>Promotions</li>
+          <li>Refer A Friend</li>
+        </ul>
+      </div>
+      <div class="footercol">
+        <h4>SERVICES</h4>
+        <ul>
+          <li>Payments</li>
+          <li>Shipping</li>
+          <li>Product Returns</li>
+          <li>FAQs</li>
+          <li>Checkout</li>
+          <li>Other Issues</li>
+        </ul>
+      </div>
+      <div class="footercol">
+        <h4>HELP CENTER</h4>
+        <ul>
+          <li>Payments</li>
+          <li>Shipping</li>
+          <li>Product Returns</li>
+          <li>FAQs</li>
+          <li>Checkout</li>
+          <li>Other Issues</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

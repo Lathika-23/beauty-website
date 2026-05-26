@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="head text-center py-5">
+        <h1>PRODUCT DESCRIPTION</h1>
+        <p>HOME / PAGE / CART</p>
+    </div>
+
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+      <style>
+        .od{
+          padding-left: 400px;
+          margin-top: 150px;
+          margin-bottom: 100px;
+        }
+        .hom{
+          color: 521C0D ;
+          background-color:B9D4AA  ;
+        }
+        .cr{
+           background-color: F0F2BD;
+        }
+        .bo{
+          background-color: ECFAE5;
+        }
+        .btn{
+            height: 40px;
+            background-color: #6b0f0f;
+            color: #FFF9EB; 
+            margin-top: 100px;       
+          }
+          button{
+            margin-top: 100px;
+          }
+          #toast{
+    visibility: hidden;
+    min-width: 300px;
+    background-color: rgb(6, 87, 6);
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    padding: 15px;
+    
+    position: fixed;
+    top: 20px;
+    right: 20px;
+
+    z-index: 999;
+    font-size: 16px;
+}
+
+#toast.show{
+    visibility: visible;
+
+    animation: fadein 0.5s,
+               fadeout 0.5s 2.5s;
+}
+
+      </style>
+      </head>
+
+
+    <body class="bo">
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <div class="od">
+      <br><br>
+        <div class=" cr card mb-3 " style="max-width: 840px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{{ product.image.url }}" class="img-fluid rounded-start" >
+    </div>
+    <div class="col-md-8">
+      <div class=" cr card-body">
+        <h5 class="card-title">{{ product.name }}</h5>
+        <p class="card-text">{{ product.description }}</p>
+
+
+     {% if product.is_sale %}
+         
+          <strike>${{ product.price }}</strike>
+          &nbsp;
+          ${{ product.sale_price }}
+        <br/>
+
+
+
+
+        {% else %}
+
+
+        ${{ product.price }}
+
+
+        {% endif %}
+
+
+
+
+<!--  <button type="button" value="{{ product.id }}" class="btn btn-secondary" id="add-cart">Add to Cart </button>-->  
+  <button onclick="showToast()" 
+type="button" 
+value="{{ product.id }}" 
+class="btn btn-secondary" 
+id="add-cart">
+
+    Add to Cart
+
+</button>
+
+<div id="toast">
+    Product Added Successfully!
+</div>
+
+    <script>
+        function showToast() {
+
+            var toast = document.getElementById("toast");
+
+            toast.className = "show";
+
+            setTimeout(function(){
+                toast.className = toast.className.replace("show", "");
+            }, 3000);
+        }
+    </script>
+
+        <a href="{% url 'cart_summary' %}" class="btn btn-secondary">View Cart</a>
+        </div>
+      </div>
+    </div>
+
+
+      </div>
+    </div>
+  </div>
+   </div>
+</div>
+     </body>
+
+<script>
+$(document).on('click','#add-cart', function(e){
+  e.preventDefault(); 
+  $.ajax({  
+    type: 'POST', 
+    url:"{% url 'cart_add' %}", 
+    data:{
+      product_id:$('#add-cart').val(), 
+      product_qty: $('#qty-cart option:selected').text(),
+      csrfmiddlewaretoken: '{{ csrf_token }}', 
+      action: 'post' 
+    },
+    success: function(json){
+      //console.log(json)
+       document.getElementById("cart_quantity").textContent = json.qty
+    },
+
+    error: function(xhr, errmsg, err){ 
+    }
+   
+  });
+})
+</script>
+
+{% endblock %}

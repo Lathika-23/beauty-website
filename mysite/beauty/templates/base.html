@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura e-Commerce</title>
+
+    <link rel="stylesheet" href="{% static 'css/cartstyle.css' %}">
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+    <link rel="stylesheet" href="{% static 'css/loginstyle.css' %}">
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+    <link rel="stylesheet" href="{% static 'css/product.css' %}">
+    <link rel="stylesheet" href="{% static 'css/productdetails.css' %}">
+    <link rel="stylesheet" href="{% static 'css/productdetails1.css' %}">
+    <link rel="stylesheet" href="{% static 'css/productdetails2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/productdetails3.css' %}">
+    <link rel="stylesheet" href="{% static 'css/productdetails4.css' %}">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+
+<body>
+ <section id="top"> 
+        <nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+        <img src="{% static 'images/logo.png' %}">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-3 mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'index' %}" style="color: white;">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'about' %}" style="color: white;">About</a>
+        </li>
+       <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'product' %}" style="color: white;">Product</a>
+        </li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Single Product
+        </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+             <li><a class="dropdown-item" href="{% url 'category' 'Fragrance' %}">Fragrance</a></li>
+                <li><a class="dropdown-item" href="{% url 'category' 'Lipsticks' %}">Lipstick</a></li>
+                <li><a class="dropdown-item" href="{% url 'category' 'Serum' %}">Serum</a></li>
+                <li><a class="dropdown-item" href="{% url 'category' 'Nail color' %}">Nail Colour</a></li>
+                <li><a class="dropdown-item" href="{% url 'category' 'Makeup' %}">Makeup</a></li>
+
+          </ul>
+        </li>
+         <div class="icon">
+          <a href="{% url 'login' %}">
+            <i class="fa-solid fa-user" style="color: white;"></i></a>
+          <a href="#"><i class="fa-solid fa-heart" style="color: white;"></i></a>  
+          <a href="{% url 'cart_summary' %}"><i class="fa-solid fa-cart-shopping" style="color: white;"><span class="badge bg-dark text-white ms-1 rounded-pill" id="cart_quantity"></span></i></a>
+           <a href="{% url 'search' %}"><i class="fa-solid fa-magnifying-glass" style="color: white;"></i></a>
+        </div>
+    </div>
+  </div>
+</nav>
+    </div>
+        
+
+    {% block content %}
+    {% endblock %}
+
+
+
+
+
+
+    
+
+  <footer class="footer">
+   <div class="footercontainer">
+     <div class="footercol">
+      <h1 class="logo">AURA</h1>
+      <p>Find and Define Your Perfect Beauty</p>
+      <div class="socialicons">
+        <i class="fa-brands fa-facebook-f"></i>
+        <i class="fa-brands fa-twitter"></i>
+        <i class="fa-brands fa-pinterest-p"></i>
+        <i class="fa-brands fa-instagram"></i>
+        <i class="fa-brands fa-youtube"></i>
+      </div>
+    </div>
+    <div class="footercol">
+      <h4>QUICK LINKS</h4>
+      <ul>
+        <li>Home</li>
+        <li>About Us</li>
+        <li>Offer</li>
+        <li>Services</li>
+        <li>Contact Us</li>
+      </ul>
+    </div>
+    <div class="footercol">
+      <h4>ABOUT</h4>
+      <ul>
+        <li>How It Work</li>
+        <li>Our Packages</li>
+        <li>Promotions</li>
+        <li>Refer A Friend</li>
+      </ul>
+    </div>
+    <div class="footercol">
+      <h4>SERVICES</h4>
+      <ul>
+        <li>Payments</li>
+        <li>Shipping</li>
+        <li>Product Returns</li>
+        <li>FAQs</li>
+        <li>Checkout</li>
+        <li>Other Issues</li>
+      </ul>
+    </div>
+    <div class="footercol">
+      <h4>HELP CENTER</h4>
+      <ul>
+        <li>Payments</li>
+        <li>Shipping</li>
+        <li>Product Returns</li>
+        <li>FAQs</li>
+        <li>Checkout</li>
+        <li>Other Issues</li>
+      </ul>
+    </div>
+   </div>
+</footer>
+</body>
+</html>

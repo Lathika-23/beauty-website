@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+
+<div class="container py-5">
+
+
+    <h2 class="text-center mb-5">Our Products</h2>
+
+
+    <div class="row g-4">
+
+
+        {% for product in products %}
+        <div class="col-md-3 col-sm-6">
+            <div class="card shadow-sm h-100 position-relative">
+
+
+                <!-- Sale Badge -->
+                {% if product.is_sale %}
+                <div class="badge bg-danger position-absolute" style="top:10px; right:10px;">
+                    SALE
+                </div>
+                {% endif %}
+
+
+                <!-- Product Image -->
+                <img src="{{ product.image.url }}" class="card-img-top" style="height:250px; object-fit:cover;">
+
+
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ product.name }}</h5>
+
+
+                    {% if product.is_sale %}
+                        <p class="card-text fw-bold text-danger">
+                            <strike>${{ product.price }}</strike>
+                            &nbsp; ${{ product.sale_price }}
+                        </p>
+                    {% else %}
+                        <p class="card-text fw-bold">${{ product.price }}</p>
+                    {% endif %}
+                </div>
+
+
+                <div class="card-footer text-center bg-white border-0 pb-3">
+                    <a href="#" class="btn btn-dark btn-sm">View Product</a>
+                </div>
+
+
+            </div>
+        </div>
+        {% endfor %}
+
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}
+
+

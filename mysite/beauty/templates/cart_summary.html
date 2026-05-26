@@ -1,0 +1,275 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<head>
+  <style>
+
+    .container{
+        padding-top:350px;
+    }
+
+    .c1{
+      text-align:center;
+      color:#FFF9EB;
+      margin-top:150px;
+      font-size:60px;
+      font-family:'Times New Roman', Times, serif;
+    }
+
+    
+
+  </style>
+</head>
+
+<h1 class="c1">CART PAGE</h1>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<div class="container">
+
+  {% if product_data %}
+
+  <div class="row">
+
+    <!-- PRODUCTS -->
+    <div class="col-md-8">
+
+      {% for item in product_data %}
+
+      <div class="card mb-4 p-3 shadow-sm">
+
+        <div class="row align-items-center">
+
+          <!-- IMAGE -->
+          <div class="col-md-4 text-center">
+
+            <img src="{{ item.product.image.url }}"
+                 class="img-fluid rounded product-img">
+
+          </div>
+
+          <!-- DETAILS -->
+          <div class="col-md-8">
+
+            <h4>{{ item.product.name }}</h4>
+
+            <p>
+              Product Total:
+              ₹<span id="total-{{ item.product.id }}">
+                {{ item.total }}
+              </span>
+            </p>
+
+            <!-- QUANTITY -->
+            <div class="d-flex align-items-center mt-3">
+
+              <!-- DECREMENT -->
+              <button class="btn btn-outline-secondary btn-sm decrement"
+                      data-index="{{ item.product.id }}">
+
+                -
+
+              </button>
+
+              <!-- QTY -->
+              <span id="qty-{{ item.product.id }}"
+                    class="mx-3 fw-bold"
+                    data-price="{{ item.product.price }}">
+
+                {{ item.quantity }}
+
+              </span>
+
+              <!-- INCREMENT -->
+              <button class="btn btn-outline-secondary btn-sm increment"
+                      data-index="{{ item.product.id }}">
+
+                +
+
+              </button>
+
+              <!-- UPDATE -->
+              <button class="btn btn-secondary ms-3 update-cart"
+                      data-index="{{ item.product.id }}">
+
+                Update
+
+              </button>
+
+            </div>
+
+            <!-- DELETE -->
+            <button class="btn btn-danger mt-3 delete-product"
+                    data-index="{{ item.product.id }}">
+
+              Delete
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      {% endfor %}
+
+    </div>
+
+
+    <!-- TOTAL SECTION -->
+    <div class="col-md-4">
+
+      <div class="card p-4 shadow-sm">
+
+        <h3 class="mb-4">
+          Cart Summary
+        </h3>
+
+        <div class="d-flex justify-content-between mb-3">
+
+          <span>Total Amount</span>
+
+          <strong>
+            ₹{{ totals }}
+          </strong>
+
+        </div>
+
+        <a href="{% url 'checkout' %}"
+           class="btn btn-success w-100">
+
+          Checkout
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  {% else %}
+
+  <h3 class="text-center text-danger mt-5">
+
+    You haven't added any items yet.
+
+  </h3>
+
+  {% endif %}
+
+</div>
+
+
+<script>
+
+  // UPDATE DISPLAY
+  function updateQuantityDisplay(productID, newQty){
+
+      document.getElementById("qty-" + productID).textContent = newQty;
+
+      let price = parseFloat(
+          document.getElementById("qty-" + productID)
+          .getAttribute("data-price")
+      );
+
+      let total = price * newQty;
+
+      document.getElementById("total-" + productID).textContent = total;
+
+  }
+
+
+  // INCREMENT
+  $(document).on('click', '.increment', function(){
+
+      let productID = $(this).data('index');
+
+      let qty = parseInt($('#qty-' + productID).text());
+
+      qty += 1;
+
+      updateQuantityDisplay(productID, qty);
+
+  });
+
+
+  // DECREMENT
+  $(document).on('click', '.decrement', function(){
+
+      let productID = $(this).data('index');
+
+      let qty = parseInt($('#qty-' + productID).text());
+
+      if(qty > 1){
+          qty -= 1;
+      }
+
+      updateQuantityDisplay(productID, qty);
+
+  });
+
+
+  // UPDATE CART
+  $(document).on('click', '.update-cart', function(e){
+
+      e.preventDefault();
+
+      let productID = $(this).data('index');
+
+      let qty = $('#qty-' + productID).text().trim();
+
+      $.ajax({
+
+          type:'POST',
+
+          url:"{% url 'cart_update' %}",
+
+          data:{
+              product_id:productID,
+              product_qty:qty,
+              csrfmiddlewaretoken:'{{ csrf_token }}',
+              action:'post'
+          },
+
+          success:function(){
+              location.reload();
+          }
+
+      });
+
+  });
+
+
+  // DELETE PRODUCT
+  $(document).on('click', '.delete-product', function(e){
+
+      e.preventDefault();
+
+      let productID = $(this).data('index');
+
+      $.ajax({
+
+          type:'POST',
+
+          url:"{% url 'cart_delete' %}",
+
+          data:{
+              product_id:productID,
+              csrfmiddlewaretoken:'{{ csrf_token }}',
+              action:'post'
+          },
+
+          success:function(){
+              location.reload();
+          }
+
+      });
+
+  });
+
+</script>
+
+{% endblock %}

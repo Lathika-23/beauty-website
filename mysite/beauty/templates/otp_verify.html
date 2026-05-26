@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .otp{
+        margin-top: 300px;
+        
+    }
+    .oh{
+        margin-top: 200px;
+        margin-left: 650px;
+        color: antiquewhite;
+        font-size: 40px;
+    }
+    </style>
+<h2 class="oh">OTP VERIFICATION</h2>
+
+<div class="container otp">
+
+    <h2>OTP Verification</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST" action="{% url 'verify_otp' %}">
+        {% csrf_token %}
+
+        <input type="hidden"
+               name="username"
+               value="{{ username }}">
+
+        <div class="mb-3">
+            <label>Enter OTP</label>
+
+            <input type="text"
+                   name="otp"
+                   class="form-control"
+                   required>
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            Verify OTP
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

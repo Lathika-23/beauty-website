@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<body>
+    
+   <!--section1-->
+  
+    <div class="head">
+        <h1>ABOUT US</h1>
+        <p>HOME/PAGE/Cart</p>
+    </div>
+   </section>
+
+<!--section 2-->
+<section class="ab">
+    <div class="ab1">
+        <img src="{% static 'images/banner1.jpg' %}" width="600px",height="600px">
+    </div>
+    <div class="ab2">    
+        <h3>How Aura Started</h3>
+        <p>In commodo auctor eget congue sit. Ultrices eget pretium sit euismod mi id. Risus, aliquam odio posuere ac in in nisl sed augue. Porta aenean egestas malesuada in pulvinar enim viverra. Adipisci aperiam tempora sed et dolore dignissimos facere cumque qui dicta.<br>
+
+✓ Porta aenean egestas malesuada in pulvinar enim viverra.<br>
+
+✓ Porta aenean egestas malesuada in pulvinar enim viverra.<br>
+
+✓ Porta aenean egestas malesuada in pulvinar enim viverra.</p>
+
+<button>READ BLOG</button>
+    </div>
+</section>
+
+<section class="ba">
+   
+    <div class="ba1">    
+        <h3>You can buy best products from Aura.</h3>
+        <p>Aliquet nunc vitae interdum mauris pretium lectus mauris viverra ornare quam diam felis. Ultrices eget pretium sit euismod mi id risus, aliquam odio posuere ac in in nisl sed augue. Porta aenean egestas malesuada in pulvinar enim viverra.<br><br>
+
+Ultrices eget pretium sit euismod mi id risus, aliquam odio posuere ac in in nisl sed augue. Porta aenean egestas malesuada in pulvinar enim viverra. ipsum dolor sit amet consectetur. Ipsum ipsum ut pulvinar ipsum cras metus purus mattis integer.</p>
+
+<button>READ BLOG</button>
+    </div>
+     <div class="ba2">
+        <img src="{% static 'images/banner3.jpg' %}" width="600px",height="600px">
+    </div>
+</section>
+<!--section3-->
+<div class="offer">
+  <div class="offerdiv1">
+    <p class="offerp">
+    Get <i>20%</i> OFF on Your First Purchase
+  </p>
+  <p class="offerp2">
+    Sign Up for our newsletter and never miss any offers
+  </p>
+  </div>
+  <div class="offerdiv2">
+    <label>
+      <input type="email" placeholder="Enter Your Email Address">
+    </label><br>
+     <a href="{% url 'login' %}"><button class="registerb">Register Now</button></a>
+  </div>
+</div>
+
+<!--section8-->
+<section class="symbol">
+  <div class="symbol1">
+    <i class="fa-solid fa-cart-shopping"></i>
+    <h3>FREE DELIVERY</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur<br> adipi elit.</p>
+  </div>
+  <div class="symbol1">
+    <i class="fa-solid fa-shield"></i>
+    <h3>100% SECURED PAYMENT</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur<br> adipi elit.</p>
+  </div>
+  <div class="symbol1">
+    <i class="fa-solid fa-award"></i>
+    <h3>QUALITY GUARANTEE</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur<br> adipi elit.</p>
+  </div>
+  <div class="symbol1">
+    <i class="fa-solid fa-circle-dollar-to-slot"></i>
+    <h3>DAILY OFFER</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur<br> adipi elit.</p>
+  </div>
+</section>
+
+<!--section9-->
+<section class="blog">
+  <div class="blogtop">
+    <h1 class="blogh">RECENT BLOG POST</h1>
+    <button class="blogb">Read More</button>
+  </div>
+</section>
+
+<!--section10-->
+<div class="blogcards">
+  <div class="blogcard">
+    <img src="{% static 'images/blog5.jpg' %}">
+     <h2 class="blogtitle">
+      10 Essential Summer Skincare Tips
+    </h2>
+    <p class="blogtext">
+      Protect your skin from sun damage while maintaining that healthy glow. Discover our expert-recommended summer skincare routine that will keep your complexion radiant all season long.
+    </p>
+  </div>
+  <div class="blogcard">
+    <img src="{% static 'images/blog2.jpg' %}">
+    <h2 class="blogtitle">
+      Luxury Beauty Brands On A Budget
+    </h2>
+    <p class="blogtext">
+      You don't need to break the bank for premium beauty results. We've curated the best affordable alternatives to high-end products that deliver exceptional quality without the luxury price tag.
+    </p>
+  </div>
+  <div class="blogcard">
+    <img src="{% static 'images/blog1.jpg' %}">
+    <h2 class="blogtitle">
+      Pro Makeup Artist Secrets Revealed
+    </h2>
+     <p class="blogtext">
+      Learn the techniques that professional makeup artists use to create flawless looks. From foundation application to perfect winged eyeliner, master these skills for everyday glamour.
+    </p>
+  </div>
+</div>
+<!--section11-->
+{% endblock %}

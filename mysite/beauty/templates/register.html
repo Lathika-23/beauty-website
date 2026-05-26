@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<body>
+   
+    
+    <div class="head">
+        <h1>SIGNUP</h1>
+        <p>HOME/PAGE/Cart</p>
+    </div>
+   </section> 
+   <!--section2-->
+    <h2 class="hs2">SIGNUP</h2>
+<form method="POST" class="ff1">
+    {% csrf_token %}
+    {{form.as_p}}
+  <a href="{% url 'login' %}" ><button type="submit" class="bb1">Signup</button></a>
+</form>
+<p class="ps">Already do you have account? <a href="{% url 'login' %}" class="login">LOGIN</a></p>
+{% for message in messages %}
+  <p class="pm">{{message}}</p>
+{% endfor %}
+<!--offer-->
+   <div class="offer">
+  <div class="offerdiv1">
+    <p class="offerp">
+    Get <i>20%</i> OFF on Your First Purchase
+  </p>
+  <p class="offerp2">
+    Sign Up for our newsletter and never miss any offers
+  </p>
+  </div>
+  <div class="offerdiv2">
+    <label >
+      <input type="email" placeholder="Enter Your Email Address"class="offerd" >
+    </label><br>
+     <a href="{% url 'login' %}"><button class="registerb">Register Now</button></a>
+  </div>
+</div>
+{% endblock %}

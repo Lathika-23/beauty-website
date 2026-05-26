@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+h2{
+  margin-top: 300px;
+}
+
+#toast{
+    min-width: 300px;
+    background-color: green;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    padding: 15px;
+
+    position: fixed;
+    top: 100px;
+    right: 20px;
+
+    z-index: 999;
+    font-size: 16px;
+
+    visibility: hidden;
+}
+
+#toast.show{
+    visibility: visible;
+
+    animation: fadein 0.5s,
+               fadeout 0.5s 2.5s;
+}
+
+</style>
+
+<div class="head">
+    <h1>LOGIN</h1>
+    <p>HOME/PAGE/Cart</p>
+</div>
+
+<h2>Login</h2>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<form method="POST">
+    {% csrf_token %}
+
+    <div class="mb-3">
+        <label>Username:</label>
+        <input type="text" name="username" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label>Password:</label>
+        <input type="password" name="password" class="form-control" required>
+    </div>
+
+    <button type="submit" class="bt">
+        Login
+    </button>
+
+</form>
+
+<p class="sp1">
+    Don't have account?
+    <a href="{% url 'register' %}" class="sign">
+        SIGNUP
+    </a>
+</p>
+
+{% for message in messages %}
+
+<div id="toast" class="show">
+    {{ message }}
+</div>
+
+{% endfor %}
+
+{% endblock %}

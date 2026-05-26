@@ -1,0 +1,334 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<body>
+  
+    <section id="top"> 
+        <nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+        <img src="{% static 'images/logo.png' %}">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-3 mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'index' %}" style="color: white;">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'about' %}" style="color: white;">About</a>
+        </li>
+       <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'product' %}" style="color: white;">Product</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Single Product
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+           <li><a class="dropdown-item" href="{% url 'category' 'Fragrance' %}">Fragrance</a></li>
+                <li><a class="dropdown-item" href="{% url 'category' 'Lipsticks' %}">Lipstick</a></li>
+                <li><a class="dropdown-item" href="{% url 'category' 'Serum' %}">Serum</a></li>
+                <li><a class="dropdown-item" href="{% url 'category' 'Nail color' %}">Nail Colour</a></li>
+                <li><a class="dropdown-item" href="{% url 'category' 'Makeup' %}">Makeup</a></li>
+          </ul>
+        </li>
+         <div class="icon">
+          <a href="{% url 'login' %}">
+            <i class="fa-solid fa-user" style="color: white;"></i></a>
+          <a href="#"><i class="fa-solid fa-heart" style="color: white;"></i></a>  
+          <a href="{% url 'cart' %}"><i class="fa-solid fa-cart-shopping" style="color: white;"></i></a>
+           <a href="#"><i class="fa-solid fa-magnifying-glass" style="color: white;"></i></a>
+        </div>
+    </div>
+  </div>
+</nav>
+    </div>
+    <div class="head">
+        <h1>NAIL COLOUR</h1>
+        <p>HOME/PAGE/Cart</p>
+    </div>
+   </section> 
+
+   <!--section 2-->
+   <!-- PRODUCT 1 -->
+
+<section class="product-details">
+
+    <div class="left-side">
+
+        <img id="mainimage1"
+        src="{% static 'images/d1.jpg' %}"
+        class="main-image">
+
+        <div class="small-images">
+
+            <img src="{% static 'images/d2.jpg' %}"
+            onclick="changeImage(this,1)">
+
+            <img src="{% static 'images/d3.jpg' %}"
+            onclick="changeImage(this,1)">
+
+            <img src="{% static 'images/d4.webp' %}"
+            onclick="changeImage(this,1)">
+
+             <img src="{% static 'images/d5.webp' %}"
+            onclick="changeImage(this,1)">
+
+
+        </div>
+
+    </div>
+
+
+    <div class="right-side">
+
+        <h1>DAZZLE</h1>
+
+        <div class="rating">
+            ★★★★★
+        </div>
+
+        <h2 id="price1">₹1500</h2>
+
+        <p>
+            Premium floral fragrance with elegant long lasting smell.
+        </p>
+
+        <h3>Select Size</h3>
+
+        <div class="ml-buttons">
+
+            <button onclick="changePrice('250ML','1500',1)">
+                250ML
+            </button>
+
+            <button onclick="changePrice('500ML','2500',1)">
+                500ML
+            </button>
+
+            <button onclick="changePrice('750ML','3500',1)">
+                750ML
+            </button>
+
+        </div>
+
+        <p id="selectedml1">
+            Selected : 250ML
+        </p>
+
+        <div class="cart-section">
+
+            <button>-</button>
+
+            <input type="text" value="1">
+
+            <button>+</button>
+
+            <button class="cart-btn">
+                Add To Cart
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- PRODUCT 2 -->
+
+<section class="product-details">
+
+    <div class="left-side">
+
+        <img id="mainimage2"
+        src="{% static 'images/d11.jpg' %}"
+        class="main-image">
+
+        <div class="small-images">
+
+            <img src="{% static 'images/d12.jpg' %}"
+            onclick="changeImage(this,2)">
+
+            <img src="{% static 'images/d13.jpg' %}"
+            onclick="changeImage(this,2)">
+
+            <img src="{% static 'images/d14.jpg' %}"
+            onclick="changeImage(this,2)">
+            <img src="{% static 'images/d15.jpg' %}"
+            onclick="changeImage(this,2)">
+
+
+        </div>
+
+    </div>
+
+
+    <div class="right-side">
+
+        <h1>CHANEL</h1>
+
+        <div class="rating">
+            ★★★★★
+        </div>
+
+        <h2 id="price2">₹1500</h2>
+
+        <p>
+            Premium floral fragrance with elegant long lasting smell.
+        </p>
+
+        <h3>Select Size</h3>
+
+        <div class="ml-buttons">
+
+            <button onclick="changePrice('250ML','1500',2)">
+                250ML
+            </button>
+
+            <button onclick="changePrice('500ML','2500',2)">
+                500ML
+            </button>
+
+            <button onclick="changePrice('750ML','3500',2)">
+                750ML
+            </button>
+
+        </div>
+
+        <p id="selectedml2">
+            Selected : 250ML
+        </p>
+
+        <div class="cart-section">
+
+            <button>-</button>
+
+            <input type="text" value="1">
+
+            <button>+</button>
+
+            <button class="cart-btn">
+                Add To Cart
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- PRODUCT 3 -->
+
+<section class="product-details">
+
+    <div class="left-side">
+
+        <img id="mainimage3"
+        src="{% static 'images/d21.webp' %}"
+        class="main-image">
+
+        <div class="small-images">
+
+            <img src="{% static 'images/d22.webp' %}"
+            onclick="changeImage(this,3)">
+
+            <img src="{% static 'images/d23.webp' %}"
+            onclick="changeImage(this,3)">
+
+            <img src="{% static 'images/d24.webp' %}"
+            onclick="changeImage(this,3)">
+
+            <img src="{% static 'images/d25.avif' %}"
+            onclick="changeImage(this,3)">
+
+
+        </div>
+
+    </div>
+
+
+    <div class="right-side">
+
+        <h1>COLOR BAR</h1>
+
+        <div class="rating">
+            ★★★★★
+        </div>
+
+        <h2 id="price3">₹1500</h2>
+
+        <p>
+            Premium floral fragrance with elegant long lasting smell.
+        </p>
+
+        <h3>Select Size</h3>
+
+        <div class="ml-buttons">
+
+            <button onclick="changePrice('250ML','1500',3)">
+                250ML
+            </button>
+
+            <button onclick="changePrice('500ML','2500',3)">
+                500ML
+            </button>
+
+            <button onclick="changePrice('750ML','3500',3)">
+                750ML
+            </button>
+
+        </div>
+
+        <p id="selectedml3">
+            Selected : 250ML
+        </p>
+
+        <div class="cart-section">
+
+            <button>-</button>
+
+            <input type="text" value="1">
+
+            <button>+</button>
+
+            <button class="cart-btn">
+                Add To Cart
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ONLY ONE SCRIPT -->
+
+<script>
+
+function changeImage(img,num)
+{
+    document.getElementById("mainimage"+num).src = img.src;
+}
+
+function changePrice(ml,price,num)
+{
+    document.getElementById("price"+num).innerHTML =
+    "₹" + price;
+
+    document.getElementById("selectedml"+num).innerHTML =
+    "Selected : " + ml;
+}
+
+</script>  
+   <!--footer-->
+   {% endblock %}

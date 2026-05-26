@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+ 
+    <div class="head">
+        <h1>CART</h1>
+        <p>HOME/PAGE/Cart</p>
+    </div>
+   </section>   
+   <!--section2-->
+<section class="setion2">
+  <div class="sec1">
+   <div class="heads">
+     <h4 class="heads1">PRODUCT</h4> 
+     <h4 class="heads2"></h4>
+     <h4 class="heads3">QUANTITY</h4>
+     <h4 class="heads4">SUBTOTAL</h4>
+   </div>
+   <div class="product1">
+    <img src="{% static 'images/product-item15.jpg' %}">
+    <p class="pro1">Black Sunglasses</p>
+    <div class="prob1">
+       <button class="plus">+</button>
+       <button class="num">1</button>
+       <button class="minus">-</button>
+    </div>
+    <p class="price">&#36;150.00</p>
+    <i class="fa-solid fa-trash-can"></i>
+   </div>
+   <div class="product1">
+    <img src="{% static 'images/product-item10.jpg' %}">
+    <p class="pro1">Framed Glasseses</p>
+    <div class="prob1">
+       <button class="plus">+</button>
+       <button class="num">1</button>
+       <button class="minus">-</button>
+    </div>
+    <p class="price">&#36;150.00</p>
+    <i class="fa-solid fa-trash-can"></i>
+   </div>
+   <div class="product1">
+    <img src="{% static 'images/product-item13.jpg' %}">
+    <p class="pro1">Brown Eyebrown</p>
+    <div class="prob1">
+       <button class="plus">+</button>
+       <button class="num">1</button>
+       <button class="minus">-</button>
+    </div>
+    <p class="price">&#36;150.00</p>
+    <i class="fa-solid fa-trash-can"></i>
+   </div>
+  </div>
+  <div class="sec2">
+    <p class="sec2cart">Cart Total</p>
+    <p class="sec2cart1">SUBTOTAL  $1,500.00</p>
+    <p class="sec3cart2">TOTAL  $1,500.00</p>
+    <button class="sb1">UPDATE CART</button>
+    <button class="sb2">CONTINUE SHOP</button>
+    <button class="sb3">PROCEED TO CHECKOUT</button>
+  </div> 
+</section> 
+<div class="offer">
+  <div class="offerdiv1">
+    <p class="offerp">
+    Get <i>20%</i> OFF on Your First Purchase
+  </p>
+  <p class="offerp2">
+    Sign Up for our newsletter and never miss any offers
+  </p>
+  </div>
+  <div class="offerdiv2">
+    <label>
+      <input type="email" placeholder="Enter Your Email Address">
+    </label><br>
+     <a href="{% url 'login' %}"><button class="registerb">Register Now</button></a>
+  </div>
+</div>
+{% endblock %}
