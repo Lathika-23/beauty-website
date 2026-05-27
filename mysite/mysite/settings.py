@@ -25,8 +25,11 @@ SECRET_KEY = 'django-insecure-ovlix^vj*h@eqd7qb&hs=@p=))+^9grw23*9qkf2&+7--=^4kk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [
+    "beauty-website-sltx.onrender.com",
+    "127.0.0.1",
+    "localhost",
+]
 
 # Application definition
 
