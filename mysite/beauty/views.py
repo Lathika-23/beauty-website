@@ -265,23 +265,20 @@ def login_user(request):
 
         if user is not None:
 
-            otp = random.randint(100000, 999999)
+         otp = random.randint(100000, 999999)
 
-            request.session['otp'] = str(otp)
-
-            request.session['username'] = username
-
-            send_mail(
-                subject='Your OTP Code',
-                message=f'Your OTP is: {otp}',
-                from_email=settings.EMAIL_HOST_USER,
-                recipient_list=[user.email],
-                fail_silently=False,
+          request.session['otp'] = str(otp)
+          request.session['username'] = username
+          request.session['user_id'] = user.id
+          send_mail(
+            subject='Your OTP Code',
+            message=f'Your OTP is: {otp}',
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[user.email],
+            fail_silently=False,
             )
 
-            return render(request, 'otp_verify.html', {
-                'username': username
-            })
+            return redirect('verify_otp')
 
         else:
 
@@ -297,49 +294,21 @@ def verify_otp(request):
 
     if request.method == "POST":
 
-        entered_otp = request.POST.get('otp')
+        otp_entered = request.POST.get("otp")
 
-        username = request.POST.get('username')
+        if otp_entered == request.session.get('otp'):
 
-        saved_otp = request.session.get('otp')
+            user_id = request.session.get('user_id')
+            user = User.objects.get(id=user_id)
 
-        saved_username = request.session.get('username')
+            login(request, user)   # ✅ LOGIN HERE
 
-        if username != saved_username:
-
-            messages.error(request, "Session expired.")
-
-            return redirect('login')
-
-        if entered_otp == saved_otp:
-
-            try:
-
-                user = User.objects.get(username=username)
-
-            except User.DoesNotExist:
-
-                messages.error(request, "User does not exist.")
-
-                return redirect('login')
-
-            login(request, user)
-
-            request.session.pop('otp', None)
-
-            messages.success(request, "OTP verified successfully.")
-
-            return redirect('delight')
+            return redirect('home')
 
         else:
+            messages.error(request, "Invalid OTP")
 
-            messages.error(request, "Invalid OTP.")
-
-            return render(request, 'otp_verify.html', {
-                'username': username
-            })
-
-    return redirect('login')
+    return render(request, "otp_verify.html")
 
 
 # Delight Page
