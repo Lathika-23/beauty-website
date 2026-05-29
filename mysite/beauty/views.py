@@ -265,7 +265,7 @@ def login_user(request):
 
         if user is not None:
 
-         otp = random.randint(100000, 999999)
+          otp = random.randint(100000, 999999)
 
           request.session['otp'] = str(otp)
           request.session['username'] = username
@@ -276,9 +276,9 @@ def login_user(request):
             from_email=settings.EMAIL_HOST_USER,
             recipient_list=[user.email],
             fail_silently=False,
-            )
+          )
 
-            return redirect('verify_otp')
+          return redirect('verify_otp')
 
         else:
 
