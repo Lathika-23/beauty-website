@@ -32,6 +32,10 @@ ALLOWED_HOSTS = [
     "localhost",
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://beauty-website-sltx.onrender.com"
+]
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -47,12 +51,12 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -131,7 +135,6 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 MEDIA_URL='/media/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
-'cart.context_processors.cart',
 EMAIL_USE_SSL = False
 
 
@@ -139,10 +142,11 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'lathikadhanapal06@gmail.com'          # your Gmail 
+EMAIL_HOST_PASSWORD = 'wjwtnkhnprlaorgy'
 
 
-EMAIL_HOST_USER = 'lathikadhanapal06@gmail.com'          # your Gmail
-EMAIL_HOST_PASSWORD = 'wjwtnkhnprlaorgy' 
+
 
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
