@@ -254,36 +254,44 @@ def login_user(request):
     if request.method == "POST":
 
         username = request.POST.get('username')
-
         password = request.POST.get('password')
 
-        user = authenticate(
-            request,
-            username=username,
-            password=password
-        )
+        user = authenticate(request, username=username, password=password)
 
         if user is not None:
 
-          otp = random.randint(100000, 999999)
+            # 🔴 EMAIL CHECK (IMPORTANT FIX)
+            if not user.email:
+                messages.error(request, "User email not found. Please update your email.")
+                return redirect('login')
 
-          request.session['otp'] = str(otp)
-          request.session['username'] = username
-          request.session['user_id'] = user.id
-          send_mail(
-            subject='Your OTP Code',
-            message=f'Your OTP is: {otp}',
-            from_email=settings.EMAIL_HOST_USER,
-            recipient_list=[user.email],
-            fail_silently=False,
-          )
+            # OTP generate
+            otp = random.randint(100000, 999999)
 
-          return redirect('verify_otp')
+            # Save in session
+            request.session['otp'] = str(otp)
+            request.session['username'] = username
+            request.session['user_id'] = user.id
+
+            # 🔴 SEND EMAIL SAFELY
+            try:
+                send_mail(
+                    subject='Your OTP Code',
+                    message=f'Your OTP is: {otp}',
+                    from_email=settings.EMAIL_HOST_USER,
+                    recipient_list=[user.email],
+                    fail_silently=False,
+                )
+
+            except Exception as e:
+                print("Email Error:", e)
+                messages.error(request, "Failed to send OTP email. Check email settings.")
+                return redirect('login')
+
+            return redirect('verify_otp')
 
         else:
-
-            messages.error(request, "Invalid credentials.")
-
+            messages.error(request, "Invalid username or password.")
             return redirect('login')
 
     return render(request, 'login.html')
@@ -296,12 +304,22 @@ def verify_otp(request):
 
         otp_entered = request.POST.get("otp")
 
+        # 🔴 SESSION CHECK
+        if not request.session.get('otp'):
+            messages.error(request, "OTP expired. Please login again.")
+            return redirect('login')
+
         if otp_entered == request.session.get('otp'):
 
             user_id = request.session.get('user_id')
             user = User.objects.get(id=user_id)
 
-            login(request, user)   # ✅ LOGIN HERE
+            login(request, user)
+
+            # clear session after login
+            request.session.pop('otp', None)
+            request.session.pop('user_id', None)
+            request.session.pop('username', None)
 
             return redirect('home')
 
@@ -310,7 +328,7 @@ def verify_otp(request):
 
     return render(request, "otp_verify.html")
 
-
+    
 # Delight Page
 def delight(request):
     return render(request, 'delight.html')
