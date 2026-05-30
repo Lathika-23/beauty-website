@@ -284,9 +284,10 @@ def login_user(request):
                 )
 
             except Exception as e:
-                print("Email Error:", e)
-                messages.error(request, "Failed to send OTP email. Check email settings.")
-                return redirect('login')
+                 import traceback
+                 print("EMAIL ERROR:")
+                 print(str(e))
+                 traceback.print_exc()
 
             return redirect('verify_otp')
 
@@ -415,3 +416,4 @@ def checkout(request):
 # Order Page
 def order(request):
     return render(request, 'order.html')
+
